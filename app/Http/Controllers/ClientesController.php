@@ -39,8 +39,8 @@ class ClientesController extends Controller
 
 
         return Inertia::render('Clientes/Nuevo',[
-            'empresas' => Empresa::all(),
-            'convenios' => Convenio::all(),
+            'empresas' => [],
+            'convenios' => [],
 
         ]);
     }
@@ -82,9 +82,9 @@ class ClientesController extends Controller
     {
 
         return Inertia::render('Clientes/Editar',[
-            'empresas' => Empresa::all(),
+            'empresas' => [],
             'cliente' => Clientes::findOrFail($cliente),
-            'convenios' => Convenio::all(),
+            'convenios' => [],
 
         ]);
     }

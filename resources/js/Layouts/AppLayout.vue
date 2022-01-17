@@ -82,20 +82,7 @@
 
                             </ul>
                         </li>
-                          <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-users me-2"></i><span>Prestamos</span>
-                            </a>
-                            <ul class="dropdown-menu rounded-lg shadow border-0 dropdown-animation">
-                                 <Link :href="route('adelanto.index')" >
-                                    <li><a class="dropdown-item" href="#">Listado</a></li>
-                                </Link>
-                                 <Link :href="route('adelanto.create')" >
-                                    <li><a class="dropdown-item" href="#">Nuevo</a></li>
-                                </Link>
 
-                            </ul>
-                        </li>
 
 
                     </ul>

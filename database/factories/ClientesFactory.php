@@ -18,9 +18,9 @@ class ClientesFactory extends Factory
      */
     public function definition()
     {
-        
+
         return [
-            'empresas_id' => Empresa::all()->first()->id,
+
             'nombre' => $this->faker->name,
             'apaterno' => $this->faker->lastName,
             'amaterno' => $this->faker->lastName,
@@ -40,9 +40,9 @@ class ClientesFactory extends Factory
             'id_user_alta'=>  User::all()->random(1)->first()->id,
             'id_user_mod'=> User::all()->random(1)->first()->id,
             'num_empleado'=> $this->faker->userName,
-            'convenios_id' => Convenio::all()->first()->id, 
+
 
         ];
     }
-  
+
 }

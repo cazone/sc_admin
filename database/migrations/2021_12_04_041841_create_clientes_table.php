@@ -15,8 +15,6 @@ class CreateClientesTable extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('empresas_id')->constrained();
-            $table->foreignId('convenios_id')->constrained();
             $table->string('nombre',70);
             $table->string('apaterno',70);
             $table->string('amaterno',70);
