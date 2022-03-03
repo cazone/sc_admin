@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\CotizacionesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,6 +27,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::middleware(['auth:sanctum', 'verified',])->group(function () {
     Route::resource('user',  UserController::class);
     Route::resource('clientes', ClientesController::class);
+    Route::resource('cotizaciones', CotizacionesController::class);
 
 
 });

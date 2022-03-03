@@ -21,6 +21,7 @@ class ClienteResource extends JsonResource
             'amaterno' => $this->amaterno,
             'email' => $this->email,
             'celular' => $this->celular,
+
         ];
     }
 }

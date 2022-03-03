@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(RolSeeder::class);
         $this->call(UsuariosSeeder::class);
+        $this->call(ProveedoresSeeder::class);
 
         Clientes::factory(50)->create();
     }

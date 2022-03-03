@@ -39,8 +39,7 @@ class ClientesController extends Controller
 
 
         return Inertia::render('Clientes/Nuevo',[
-            'empresas' => [],
-            'convenios' => [],
+
 
         ]);
     }
@@ -68,8 +67,8 @@ class ClientesController extends Controller
      */
     public function show($clientes)
     {
-        return  Clientes::with('convenio')->where( DB::raw( 'CONCAT(nombre, " ", apaterno, " ", amaterno)' ), 'LIKE', '%'. $clientes .'%')
-        ->orWhere('num_empleado', 'LIKE', '%'. $clientes.'%')->get();
+        return  Clientes::where( DB::raw( 'CONCAT(nombre, " ", apaterno, " ", amaterno)' ), 'LIKE', '%'. $clientes .'%')
+        ->orWhere('email', 'LIKE', '%'. $clientes.'%')->get();
     }
 
     /**
@@ -82,9 +81,9 @@ class ClientesController extends Controller
     {
 
         return Inertia::render('Clientes/Editar',[
-            'empresas' => [],
+
             'cliente' => Clientes::findOrFail($cliente),
-            'convenios' => [],
+
 
         ]);
     }

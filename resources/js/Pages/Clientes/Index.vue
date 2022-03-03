@@ -16,46 +16,46 @@
                 </div>
             </div>
         </template>
-      
-            
+
+
       <el-card class="box-card">
     <template #header>
       <div class="card-header">
            <el-input
       v-model="BuscarUser.search"
-      @keypress.enter="buscar" 
+      @keypress.enter="buscar"
       placeholder="Ingresa el nombre del cliente a buscar"
       class="input-with-select"
     >
-  
+
        <template #append>
-         <el-button @click="limpiar">Limpiar</el-button> 
+         <el-button @click="limpiar">Limpiar</el-button>
       </template>
 
     </el-input>
          <!-- <el-input v-model="BuscarUser.search" @keypress.enter="buscar" style="width: 50%" placeholder="Buscar Cliente" /> -->
-      
+
       </div>
     </template>
         <el-table :data="clientes.data" stripe style="width: 100%">
-       
-        <el-table-column  fixed  prop="num_empleado" label="ID"  width="150"/>
-            <el-table-column prop="nombre" label="Nombre" width="150" />
-            <el-table-column prop="apaterno" label="Apellido Paterno" width="150"/>
-            <el-table-column prop="amaterno" label="Apellido Materno" width="150" />
-            <el-table-column prop="email" label="Correo" width="150" />
-            <el-table-column prop="rfc" label="RFC" width="150"/>
-            <el-table-column prop="curp" label="CURP" width="150"/>
-            <el-table-column prop="celular" label="Celular" width="150"/>
-             <el-table-column prop="telefono" label="Telefono" width="150"/>
-            <el-table-column fixed="right" label="" width="180">
+
+        <el-table-column  fixed  prop="id" label="ID"  width="50"  />
+            <el-table-column fixed prop="nombre" label="Nombre"  />
+            <el-table-column fixed prop="apaterno" label="Apellido Paterno"/>
+            <el-table-column prop="amaterno" label="Apellido Materno"  />
+            <el-table-column prop="email" label="Correo"  />
+            <el-table-column prop="rfc" label="RFC" />
+
+            <el-table-column prop="celular" label="Celular" />
+             <el-table-column prop="telefono" label="Telefono" />
+            <el-table-column fixed="right" label="" >
                 <template #default="scope">
 
                      <el-tooltip content="Actualizar información de cliente" placement="top">
                     <el-button
                   @click="editar(scope.row.id)"
                          size="mini"
-                         type="primary" 
+                         type="primary"
                         >Editar</el-button
                     >
                      </el-tooltip>
@@ -67,8 +67,8 @@
                         >Eliminar</el-button
                     >
    </el-tooltip>
-                    
-    
+
+
                 </template>
             </el-table-column>
         </el-table>
@@ -86,7 +86,7 @@
                         v-html="link.label"
                     ></Link>
                 </li>
-              
+
             </ul>
         </nav>
   </el-card>
@@ -120,18 +120,18 @@ export default defineComponent({
         Link,
         ElMessage,
     },
-    
+
     setup() {
-      
+
        onMounted(() => {
 
-         if(self.$page.props.flash.success){ 
+         if(self.$page.props.flash.success){
            ElMessage({
             message: self.$page.props.flash.success,
             type: 'success',
             })
          }
-         
+
        })
         let elimar_id = ""
         const BuscarUser = ref({
@@ -140,13 +140,13 @@ export default defineComponent({
 
         const dialogEliminar=ref(false)
         const eliminarShow = (row) => {
-            dialogEliminar.value = true 
+            dialogEliminar.value = true
             elimar_id = row
 
         }
         const eliminar = () =>{
             Inertia.delete(route("clientes.destroy", elimar_id))
-            dialogEliminar.value = false 
+            dialogEliminar.value = false
         }
         const limpiar = () => {
             Inertia.get(route("clientes.index"), '')
@@ -188,7 +188,7 @@ export default defineComponent({
     created () {
         self = this
     },
-    
+
 });
 </script>
 <style scoped>

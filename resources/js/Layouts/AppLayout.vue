@@ -82,6 +82,20 @@
 
                             </ul>
                         </li>
+                          <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-users me-2"></i><span>Ventas</span>
+                            </a>
+                            <ul class="dropdown-menu rounded-lg shadow border-0 dropdown-animation">
+                                 <Link :href="route('cotizaciones.create')" >
+                                    <li><a class="dropdown-item" href="#">Nueva Cotizaci&oacute;n</a></li>
+                                </Link>
+                                 <Link :href="route('cotizaciones.index')" >
+                                    <li><a class="dropdown-item" href="#">Cotizaciones</a></li>
+                                </Link>
+
+                            </ul>
+                        </li>
 
 
 

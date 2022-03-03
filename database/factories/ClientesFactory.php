@@ -21,25 +21,14 @@ class ClientesFactory extends Factory
 
         return [
 
-            'nombre' => $this->faker->name,
+            'nombre' => $this->faker->firstName,
             'apaterno' => $this->faker->lastName,
             'amaterno' => $this->faker->lastName,
             'rfc' => $this->faker->swiftBicNumber,
             'email' => $this->faker->unique()->safeEmail(),
             'telefono' => $this->faker->phoneNumber,
             'celular' => $this->faker->phoneNumber,
-            'clabe' => $this->faker->swiftBicNumber,
-            'calle' => $this->faker->streetName,
-            'colonia' => $this->faker->streetName,
-            'estado' => $this->faker->state,
-            'municipio' => $this->faker->city,
-            'cp' => $this->faker->postcode,
-            'fecha_ingreso' => $this->faker->dateTimeBetween('-1 years', 'now'),
-            'cuenta'=> $this->faker->creditCardNumber,
-            'sucursal'=> $this->faker->numberBetween(1, 10),
-            'id_user_alta'=>  User::all()->random(1)->first()->id,
-            'id_user_mod'=> User::all()->random(1)->first()->id,
-            'num_empleado'=> $this->faker->userName,
+
 
 
         ];

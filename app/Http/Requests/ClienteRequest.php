@@ -27,20 +27,7 @@ class ClienteRequest extends FormRequest
             'nombre' => ['required', 'string', 'max:70'],
             'apaterno' => ['required', 'string', 'max:70'],
             'amaterno' => ['required', 'string', 'max:20'],
-            'clabe' => ['required', 'string', 'max:20'],
-            'cuenta' => ['required', 'string', 'max:20'],
-            'rfc' => ['required', 'string', 'max:20', ],
-            'cuenta' => ['required', 'string', 'max:20'],
-            'colonia' => ['required', 'string', 'max:70'],
-            'municipio' => ['required', 'string', 'max:70'],
-            'estado' => ['required', 'string', 'max:70'],
-            'cp' => ['required', 'string', 'max:20'],
-            'telefono' => ['required', 'string', 'max:36'],
-            'celular' => ['required', 'string', 'max:36'],
-            'email' => ['required', 'email', 'max:70'],
-            'fecha_ingreso' => ['required', 'string'],
-            'empresas_id' => ['required', 'integer' ],
-            'convenios_id' => ['required', 'integer' ],
+
 
         ];
     }
