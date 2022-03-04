@@ -23,8 +23,8 @@ class CreateDetalleCotizacionsTable extends Migration
             $table->decimal('precio',12,2);
             $table->decimal('iva',12,2);
             $table->boolean('isIva');
-            $table->bigInteger('id_cotizacion')->unsigned();
-            $table->bigInteger('id_proveedor')->unsigned();
+            $table->foreignId('cotizaciones_id')->constrained();
+            $table->foreignId('proveedores_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

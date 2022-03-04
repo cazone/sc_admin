@@ -15,14 +15,14 @@ class CreateCotizacionesTable extends Migration
     {
         Schema::create('cotizaciones', function (Blueprint $table) {
             $table->id();
-            $table->decimal('balance',12,2);
+            $table->decimal('balance',12,2)->nullable();
             $table->decimal('subtotal',12,2);
             $table->decimal('utilidad',12,2);
             $table->decimal('total',12,2);
             $table->decimal('iva',12,2);
             $table->string('estatus',30);
-            $table->text('comentario');
-            $table->text('terminos');
+            $table->text('comentario')->nullable();
+            $table->text('terminos')->nullable();
             $table->date('fecha');
             $table->foreignId('cliente_id')->constrained();
             $table->foreignId('user_id')->constrained();

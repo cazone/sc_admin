@@ -289,7 +289,7 @@
                                             </el-input>
                             </div>
                         </div>
-                         <jet-button :class="{ 'text-white-50': form.processing }" :disabled="form.processing">
+                         <jet-button @click="submit" :class="{ 'text-white-50': form.processing }" :disabled="form.processing">
                                             <div v-show="form.processing" class="spinner-border spinner-border-sm" role="status">
                                               <span class="visually-hidden">Cargando...</span>
                                             </div>
@@ -304,13 +304,14 @@
   </app-layout>
 </template>
 <script  setup >
-import { defineComponent, watch , reactive,computed} from "vue"
+import { ref,  watch , reactive,computed} from "vue"
 import AppLayout from "@/Layouts/AppLayout.vue"
-import { ref } from 'vue'
 import useBuscarCliente from '@/Composables/useBuscarCliente'
 import { CommonPicker } from "element-plus";
 import { usePage } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia'
 import JetButton from '@/Jetstream/Button.vue';
+
 
 const { clienteSelectd, loading,clientes,buscarCliente } = useBuscarCliente();
  const proveedores = computed(() => usePage().props.value.proveedores)
@@ -323,10 +324,10 @@ const terminos = ref('');
 
 const fecha = ref(new Date().toISOString().slice(0, 10));
 const form = ref({
-    sku:'',
-    descripcion: '',
+    sku:'20X2S4LM00',
+    descripcion: 'Laptop Lenovo ThinkPad L14 G2 14" HD, Intel Core i5-1135G7 2.40GHz, 16GB, 256GB SSD, Windows 10 Pro 64-bit, Español, Negro',
     cantidad: 1,
-    precio: 0,
+    precio: 21099,
     isIva: true,
     iva:0,
     subtotal:0,
@@ -334,7 +335,7 @@ const form = ref({
     utilidad: 15,
     totalUtilidad:0,
     proveedor:1,
-    url:''
+    url:'https://www.cyberpuerta.mx/img/product/M/CP-LENOVO-20X2S4LM00-df7152.png'
 });
 watch(
   () => productos,
@@ -403,6 +404,40 @@ const ivaChange = (value) => {
     }
 
 //   form.value.iva = value * form.value.precio;
+}
+const submit = () => {
+  console.log(form.value);
+   Inertia.visit(route('cotizaciones.store'), {
+  method: 'post',
+  data: {
+      fecha: fecha.value,
+      subtotal: subtotal.value,
+      utilidad: utilidad.value,
+        iva: iva.value,
+        terminos: terminos.value,
+        cliente_id: clienteSelectd.value.id,
+      total: total.value,
+      productos
+  },
+
+  onCancelToken: cancelToken => {},
+  onCancel: () => {},
+  onBefore: visit => {},
+  onStart: visit => {},
+  onProgress: progress => {
+
+  },
+  onSuccess: page => {
+      console.log(page);
+  },
+  onError: errors => {
+      console.log('error',errors);
+  },
+  onFinish: visit => {
+      console.log(visit);
+  },
+})
+
 }
 
 </script>
