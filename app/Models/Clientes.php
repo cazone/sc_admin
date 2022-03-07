@@ -47,9 +47,10 @@ class Clientes extends Model
             session()->put("search", $filters['search'] ?? null);
 
         }
+
         $query->when(session("search"), function ($query, $search) {
-            $query->where(DB::raw( 'CONCAT(nombre, " ", apaterno, " ", amaterno)' ), 'LIKE', '%'. $search.'%')
-            ->orWhere('num_empleado', 'LIKE', '%'. $search.'%');
+            $query->where(DB::raw( 'CONCAT(nombre, " ", apaterno, " ", amaterno)' ), 'LIKE', '%'. $search.'%');
+
         });
    }
 
