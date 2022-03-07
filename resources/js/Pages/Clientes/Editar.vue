@@ -93,7 +93,7 @@
                                             <div v-show="form.processing" class="spinner-border spinner-border-sm" role="status">
                                               <span class="visually-hidden">Cargando...</span>
                                             </div>
-                                            Crear Cliente
+                                            Actualizar Cliente
                                           </jet-button>
                                     </div>
                                 </form>
