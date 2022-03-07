@@ -101,8 +101,6 @@
                         </div>
                     </div><!-- Personal Information Card End -->
 
-
-
     </app-layout>
 </template>
 
