@@ -82,7 +82,8 @@ class CotizacionesController extends Controller
 
         } catch (Exception $e) {
             DB::rollback();
-            return redirect()->back()->with(['success'=> $e->getMessage()]);
+
+            return redirect()->back()->with(['message'=> $e->getMessage()]);
             //throw $th;
         }
     }
@@ -131,4 +132,14 @@ class CotizacionesController extends Controller
     {
         //
     }
+    public function dowload ($cotizacion){
+
+        $pdf = \PDF::loadView('pdf.cotizacion', [
+            'cotizacion' => Cotizaciones::with('detalleCotizacion', 'cliente')->find($cotizacion)
+        ]);
+
+
+
+   return $pdf->stream('cotizacion.pdf');
+}
 }

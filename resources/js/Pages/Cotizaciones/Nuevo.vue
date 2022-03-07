@@ -289,7 +289,7 @@
                                             </el-input>
                             </div>
                         </div>
-                         <jet-button @click="submit" :class="{ 'text-white-50': form.processing }" :disabled="form.processing">
+                         <jet-button @click="submit" :class="{ 'text-white-50': form.processing }"  :disabled="productos.length == 0  || clienteSelectd.length == 0">
                                             <div v-show="form.processing" class="spinner-border spinner-border-sm" role="status">
                                               <span class="visually-hidden">Cargando...</span>
                                             </div>
@@ -297,7 +297,6 @@
                                           </jet-button>
                     </div>
                 </div> <!-- .row end -->
-
 
 
 
@@ -311,10 +310,13 @@ import { CommonPicker } from "element-plus";
 import { usePage } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia'
 import JetButton from '@/Jetstream/Button.vue';
+import { ElMessageBox, ElMessage } from 'element-plus'
 
 
 const { clienteSelectd, loading,clientes,buscarCliente } = useBuscarCliente();
  const proveedores = computed(() => usePage().props.value.proveedores)
+
+
 const productos = reactive([]);
 const subtotal = ref(0);
 const iva = ref(0);
@@ -409,6 +411,7 @@ const submit = () => {
   console.log(form.value);
    Inertia.visit(route('cotizaciones.store'), {
   method: 'post',
+    errorBag: 'createCotizacion',
   data: {
       fecha: fecha.value,
       subtotal: subtotal.value,
@@ -428,10 +431,18 @@ const submit = () => {
 
   },
   onSuccess: page => {
-      console.log(page);
+      if(page.props.flash.message){
+  ElMessageBox.alert(page.props.flash.message, 'Error', {
+    confirmButtonText: 'OK',
+
+  })
+      }
+      console.log('page',page.props.flash.message);
   },
   onError: errors => {
-      console.log('error',errors);
+     console.lpg('error');
+
+
   },
   onFinish: visit => {
       console.log(visit);

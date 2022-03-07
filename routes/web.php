@@ -28,6 +28,7 @@ Route::middleware(['auth:sanctum', 'verified',])->group(function () {
     Route::resource('user',  UserController::class);
     Route::resource('clientes', ClientesController::class);
     Route::resource('cotizaciones', CotizacionesController::class);
+    Route::get('/descargar/{cotizacion}', [CotizacionesController::class, 'dowload'])->name('cotizaciones.dowload');
 
 
 });

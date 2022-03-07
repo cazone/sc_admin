@@ -16,8 +16,8 @@ class CreateDetalleCotizacionsTable extends Migration
         Schema::create('detalle_cotizacion', function (Blueprint $table) {
             $table->id();
             $table->string('cantidad');
-            $table->string('sku');
-            $table->string('url_imagen');
+            $table->string('sku')->nullable();
+            $table->string('url_imagen')->nullable();
             $table->string('descripcion');
             $table->float('utilidad');
             $table->decimal('precio',12,2);
