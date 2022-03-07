@@ -7,6 +7,7 @@ use App\Models\DetalleCotizacion;
 use App\Models\Proveedores;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 use Inertia\Inertia;
 use Exception;
 
@@ -19,8 +20,20 @@ class CotizacionesController extends Controller
      */
     public function index()
     {
+        $clientes = Cotizaciones::with('detalleCotizacion', 'cliente')
+        ->when(request()->query("id"), function (Builder $builder) {
+            $builder->where( 'id', request()->query("id"));
+        })
+        ->when(request()->query("nombre"), function (Builder $builder) {
+            $builder->whereRelation('cliente', DB::raw('CONCAT(nombre, " ",apaterno, " ", apaterno )') , 'LIKE', '%'. request()->query("nombre").'%');
+        })
+        ->when(request()->query("email"), function (Builder $builder) {
+            $builder->whereRelation('cliente', 'email' , 'LIKE', '%'. request()->query("email").'%');
+        })
+             ->orderBy('updated_at', 'desc')
+        ->paginate(10);
         return Inertia::render('Cotizaciones/Index',[
-            'cotizaciones' => Cotizaciones::with('detalleCotizacion', 'cliente')->paginate(10),
+            'cotizaciones' =>  $clientes,
         ]);
 
 
@@ -82,9 +95,7 @@ class CotizacionesController extends Controller
 
         } catch (Exception $e) {
             DB::rollback();
-
             return redirect()->back()->with(['message'=> $e->getMessage()]);
-            //throw $th;
         }
     }
 
@@ -105,9 +116,14 @@ class CotizacionesController extends Controller
      * @param  \App\Models\Cotizaciones  $cotizaciones
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cotizaciones $cotizaciones)
+    public function edit($cotizacione)
     {
-        //
+        $cotizacion = Cotizaciones::with('detalleCotizacion', 'cliente')->find($cotizacione);
+
+        return Inertia::render('Cotizaciones/Editar',[
+            'proveedores'=> Proveedores::all('id','nombre'),
+            'cotizacion' => $cotizacion,
+        ]);
     }
 
     /**
@@ -117,9 +133,70 @@ class CotizacionesController extends Controller
      * @param  \App\Models\Cotizaciones  $cotizaciones
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cotizaciones $cotizaciones)
+    public function update(Request $request, $cotizacione)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $cotizacion =  Cotizaciones::find($cotizacione);
+            $cotizacion->subtotal = $request->subtotal;
+            $cotizacion->utilidad = $request->utilidad;
+            $cotizacion->total = $request->total;
+            $cotizacion->iva = $request->iva;
+            $cotizacion->estatus = Cotizaciones::COTIZACION;
+            $cotizacion->terminos = $request->terminos;
+            $cotizacion->fecha = $request->fecha;
+            $cotizacion->cliente_id = $request->cliente_id;
+            $cotizacion->save();
+
+
+            foreach ($request->productos as $producto) {
+                if($producto['id']){
+                    $detalle =  DetalleCotizacion::find($producto['id']);
+                    $detalle->cantidad = $producto['cantidad'];
+                    $detalle->sku = $producto['sku'];
+                    $detalle->url_imagen = $producto['url'];
+                    $detalle->descripcion = $producto['descripcion'];
+                    $detalle->utilidad = $producto['utilidad'];
+                    $detalle->precio = $producto['precio'];
+                    $detalle->iva = $producto['iva'];
+                    $detalle->isIva = $producto['isIva'];
+                    $detalle->cotizaciones_id = $cotizacion->id;
+                    $detalle->proveedores_id = $producto['proveedor'];
+                    $detalle->save();
+                }else{
+                    $detalle = new DetalleCotizacion();
+                    $detalle->cantidad = $producto['cantidad'];
+                    $detalle->sku = $producto['sku'];
+                    $detalle->url_imagen = $producto['url'];
+                    $detalle->descripcion = $producto['descripcion'];
+                    $detalle->utilidad = $producto['utilidad'];
+                    $detalle->precio = $producto['precio'];
+                    $detalle->iva = $producto['iva'];
+                    $detalle->isIva = $producto['isIva'];
+                    $detalle->cotizaciones_id = $cotizacion->id;
+                    $detalle->proveedores_id = $producto['proveedor'];
+                    $detalle->save();
+
+                }
+                foreach ($request->ids_delete as $productoDelete) {
+
+                    if($productoDelete){
+
+                     DetalleCotizacion::where('id','=' ,$productoDelete)->delete();
+
+
+                    }
+                }
+
+
+            }
+            DB::commit();
+            return redirect()->route('cotizaciones.index')->with(['success'=> 'Cotizacion creada con exito. ']);
+
+        } catch (Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with(['message'=> $e->getMessage()]);
+        }
     }
 
     /**

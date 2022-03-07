@@ -1,57 +1,59 @@
 <template>
   <app-layout title="Dashboard">
-<div class="row g-2 row-deck mb-2">
-                    <div class="col-xl-3 col-md-6">
+
+<div class="row g-3 justify-content-center">
+                    <div class="col-12">
                         <div class="card">
-                            <div class="card-body d-flex align-items-center p-4">
-                                <div class="avatar lg rounded no-thumbnail"><i class="fa fa-archive fa-lg"></i></div>
-                                <div class="flex-fill ms-3 text-truncate">
-                                    <div class="text-muted">Total Projects</div>
-                                    <h5 class="mb-0">24</h5>
-                                </div>
+                            <div class="card-header py-3 bg-transparent border-bottom-0">
+                                <h6 class="card-title mb-0"><strong>Filtros de busqueda</strong></h6>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body d-flex align-items-center p-4">
-                                <div class="avatar lg rounded no-thumbnail"><i class="fa fa-th fa-lg"></i></div>
-                                <div class="flex-fill ms-3 text-truncate">
-                                    <div class="text-muted">Completed Projects</div>
-                                    <h5 class="mb-0">22</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body d-flex align-items-center p-4">
-                                <div class="avatar lg rounded no-thumbnail"><i class="fa fa-file fa-lg"></i></div>
-                                <div class="flex-fill ms-3 text-truncate">
-                                    <div class="text-muted">Pending Projects</div>
-                                    <h5 class="mb-0">06</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card">
                             <div class="card-body">
-                                <form>
-                                    <div class="form-group mb-0">
-                                        <label>Search</label>
-                                        <div class="input-group mb-0">
-                                            <input type="text" class="form-control" placeholder="Search..." aria-describedby="project-search-addon">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-danger" type="button" id="project-search-addon"><i class="fa fa-search search-icon font-12"></i></button>
+                                <form class="row g-3">
+                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <label class="col-form-label">Numero de Cotizacion</label>
+                                        <fieldset class="form-icon-group left-icon position-relative">
+                                            <input type="text" v-model="BuscarUser.id" @keypress.enter="buscar" class="form-control">
+                                            <div class="form-icon position-absolute">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"></path>
+                                                </svg>
                                             </div>
-                                        </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <label class="col-form-label">Nombre del cliente</label>
+                                        <fieldset class="form-icon-group left-icon position-relative">
+                                            <input type="text" v-model="BuscarUser.nombre" @keypress.enter="buscar" class="form-control">
+                                            <div class="form-icon position-absolute">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"></path>
+                                                </svg>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <label class="col-form-label">Correo electronico</label>
+                                        <fieldset class="form-icon-group left-icon position-relative">
+                                            <input type="email" v-model="BuscarUser.email" @keypress.enter="buscar"  class="form-control">
+                                            <div class="form-icon position-absolute">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                                    <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"></path>
+                                                </svg>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+
+                                    <div class="col-12">
+                                        <button type="button" style="margin-right: 10px;" @click="buscar" class="btn btn-primary float-right">Buscar</button>
+                                        <button type="button" @click="limpiar" class="btn btn-secondary ">Limpiar</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div><!-- Personal Information Card End -->
+</div>
+
 <el-table :data="cotizaciones.data" datastripe style="width: 100%">
    <el-table-column  fixed  prop="id" label="ID"  width="50" >
            <template #default="scope">
@@ -94,19 +96,30 @@
                     $ {{numeralFormat(scope.row.total, '0,0.00')}}
                 </template>
             </el-table-column>
-              <el-table-column fixed="right" label="" width="50">
+              <el-table-column fixed="right" label="" width="200">
                 <template #default="scope">
                        <button type="button"
                        @click="descargar(scope.row.id)"
-                     class="btn btn-link btn-sm text-success"
+                     class="btn btn-link btn-sm text-info"
                      data-bs-toggle="tooltip" data-bs-placement="top" title="Descargar PDF"
                      data-bs-original-title="Descargar PDF" aria-label="Delete">
                      <i class="fa fa-file-pdf-o fa-2x"></i>
+                     </button>
+                     <button type="button"
+                       @click="editar(scope.row.id)"
+                     class="btn btn-link btn-sm text-success"
+                     data-bs-toggle="tooltip" data-bs-placement="top" title="Editar cotizacion"
+                     data-bs-original-title="Editar cotizacion" aria-label="Delete">
+                     <i class="fa fa-pencil-square-o fa-2x"></i>
                      </button>
                 </template>
             </el-table-column>
 </el-table>
 
+        <el-divider></el-divider>
+
+ <pagination :links="cotizaciones" text="Cotizaciones"
+        ruta="clientes.index"></pagination>
 
   </app-layout>
 </template>
@@ -118,9 +131,23 @@ import { CommonPicker } from "element-plus";
 import { usePage } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia'
 import JetButton from '@/Jetstream/Button.vue';
+import Pagination from '@/Components/Pagination.vue'
 
 import { ElLoading } from 'element-plus'
-
+const BuscarUser = ref({
+            id: null,
+            nombre: null,
+            email: null,
+        })
+        const limpiar = () => {
+            Inertia.get(route("cotizaciones.index"), '')
+        }
+const buscar = () => {
+            Inertia.get(route("cotizaciones.index"), BuscarUser.value)
+        }
+         const editar = (id) => {
+            Inertia.visit(route("cotizaciones.edit", id))
+        }
 const descargar = (id) => {
       const loading = ElLoading.service({
     lock: true,

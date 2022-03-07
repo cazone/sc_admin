@@ -270,7 +270,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="11" class="blank"> </td>
-                                        <td colspan="2" class="total-line">Ganancias</td>
+                                        <td colspan="2" class="total-line">Utilidad</td>
                                         <td class="total-value" align="right"><h5>$ {{numeralFormat(utilidad,'0,0.00')}}</h5></td>
                                     </tr>
                                     <tr>
@@ -326,8 +326,8 @@ const terminos = ref('');
 
 const fecha = ref(new Date().toISOString().slice(0, 10));
 const form = ref({
-    sku:'20X2S4LM00',
-    descripcion: 'Laptop Lenovo ThinkPad L14 G2 14" HD, Intel Core i5-1135G7 2.40GHz, 16GB, 256GB SSD, Windows 10 Pro 64-bit, Español, Negro',
+    sku:'',
+    descripcion: '',
     cantidad: 1,
     precio: 21099,
     isIva: true,
@@ -337,7 +337,7 @@ const form = ref({
     utilidad: 15,
     totalUtilidad:0,
     proveedor:1,
-    url:'https://www.cyberpuerta.mx/img/product/M/CP-LENOVO-20X2S4LM00-df7152.png'
+    url:''
 });
 watch(
   () => productos,
@@ -388,6 +388,7 @@ const delProdcuto =(index)=>{
 }
 const addProductos = () => {
  productos.push({...form.value});
+  limpiar();
 }
 const cantidadChange = (value) => {
   form.value.subtotal = value * form.value.precio;
@@ -406,6 +407,20 @@ const ivaChange = (value) => {
     }
 
 //   form.value.iva = value * form.value.precio;
+}
+const limpiar = () => {
+    form.value.sku = '';
+    form.value.descripcion = '';
+    form.value.cantidad = 1;
+    form.value.precio = 0;
+    form.value.isIva = true;
+    form.value.iva = 0;
+    form.value.subtotal = 0;
+    form.value.total = 0;
+    form.value.utilidad = 15;
+    form.value.totalUtilidad = 0;
+    form.value.proveedor = 1;
+    form.value.url = '';
 }
 const submit = () => {
   console.log(form.value);
@@ -431,6 +446,7 @@ const submit = () => {
 
   },
   onSuccess: page => {
+
       if(page.props.flash.message){
   ElMessageBox.alert(page.props.flash.message, 'Error', {
     confirmButtonText: 'OK',

@@ -1,6 +1,6 @@
 <template>
   <app-layout title="Dashboard">
-    <div class="common-layout">
+    <!-- <div class="common-layout">
  <el-container>
       <el-aside width="400px">Aside</el-aside>
       <el-container>
@@ -17,7 +17,7 @@
     <span>Hi there!</span>
   </el-drawer>
 
-
+ -->
 
   </app-layout>
 </template>
