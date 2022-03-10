@@ -34,6 +34,8 @@
         "@element-plus/icons": "0.0.11",
         "element-plus": "^1.1.0-beta.24",
         "numeral": "^2.0.6",
-        "vue-numerals": "^4.0.6"
+        "vue-bootstrap-typeahead": "^0.2.6",
+        "vue-numerals": "^4.0.6",
+        "vue3-editor": "0.1.0-alpha.3"
     }
 }

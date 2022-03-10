@@ -10,7 +10,7 @@ class Cotizaciones extends Model
     use HasFactory;
 
     const COTIZACION = 'Cotización';
-    CONST NOTA       = 'Nota de venta';
+    const NOTA       = 'Nota de venta';
     protected $fillable = [
         'balance',
         'subtotal',

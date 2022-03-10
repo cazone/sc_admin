@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\CotizacionesController;
+use App\Http\Controllers\MantenimientoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -29,6 +30,7 @@ Route::middleware(['auth:sanctum', 'verified',])->group(function () {
     Route::resource('clientes', ClientesController::class);
     Route::resource('cotizaciones', CotizacionesController::class);
     Route::get('/descargar/{cotizacion}', [CotizacionesController::class, 'dowload'])->name('cotizaciones.dowload');
-
+    Route::resource('mantenimientos', MantenimientoController::class);
+    Route::get('/descargar-recepcion/{manto}', [MantenimientoController::class, 'dowload'])->name('manto.recepcion.dowload');
 
 });

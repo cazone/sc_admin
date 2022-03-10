@@ -97,6 +97,20 @@
 
                             </ul>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-medkit me-2"></i><span>Soporte Tecnico</span>
+                            </a>
+                            <ul class="dropdown-menu rounded-lg shadow border-0 dropdown-animation">
+                                 <Link :href="route('mantenimientos.create')" >
+                                    <li><a class="dropdown-item" href="#">Recepci&oacute;n</a></li>
+                                </Link>
+                                 <Link :href="route('mantenimientos.index')" >
+                                    <li><a class="dropdown-item" href="#">Lista de soportes</a></li>
+                                </Link>
+
+                            </ul>
+                        </li>
 
 
 
