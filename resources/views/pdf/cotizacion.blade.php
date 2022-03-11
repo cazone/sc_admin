@@ -111,7 +111,7 @@
                     <table>
                         <tr>
                             <td class="title">
-                                <img src="{{ asset('/images/logo.png') }}" style="width:100px; max-width:100px;">
+                                <img src="{{ asset('/images/logo.png') }}" style="width:150px; max-width:150px;">
                             </td>
                             <td>
                                 Cotizacion: <b>C-{{$cotizacion->id}}</b><br>
