@@ -113,9 +113,7 @@
                             <td class="title">
                                 <img src="{{ asset('/images/logo.png') }}" style="width:100px; max-width:100px;">
                             </td>
-
                             <td>
-
                                 Cotizacion: <b>C-{{$cotizacion->id}}</b><br>
                                 Fecha: <b>{{ \Carbon\Carbon::parse($cotizacion->fecha)->format('d/m/Y') }}</b><br>
                                 Vencimiento: <b>{{ \Carbon\Carbon::parse($cotizacion->fecha)->add(5, 'day')->format('d/m/Y') }}</b><br>
