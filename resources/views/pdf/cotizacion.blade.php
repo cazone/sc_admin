@@ -105,7 +105,7 @@
 <body>
     <span class="pagenum"></span>
     <div class="invoice-box">
-        <table cellpadding="0" cellspacing="0">
+        <table cellpadding="0" cellspacing="0" style="width:100%" border="1">
             <tr class="top">
                 <td colspan="2">
                     <table>
