@@ -119,7 +119,7 @@
                                          <input  class="form-control" v-model="tipo" type="text"
                                             >
 
-                                             <ul v-if="$page.props.errors.modelo" class="parsley-errors-list filled" id="parsley-id-5">
+                                             <ul v-if="$page.props.errors.tipo" class="parsley-errors-list filled" id="parsley-id-5">
                                             <li class="parsley-required"> {{$page.props.errors.tipo}}</li>
                                              </ul>
 

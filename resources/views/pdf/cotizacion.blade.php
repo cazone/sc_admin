@@ -168,6 +168,7 @@
                 <th>Descripcion</th>
                 <th>Cantidad</th>
                 <th>Precio</th>
+
                 <th>Importe</th>
             </tr>
         </thead>
@@ -178,8 +179,9 @@
                 <td style="text-align:center"><img width="25" height="25" src="{{$item->url_imagen}}" alt="imagen"></td>
                 <td style="text-align:left">{{$item->descripcion}}</td>
                 <td style="text-align:center">{{$item->cantidad }}</td>
-                <td style="text-align:right">${{number_format($item->precio + $item->utilidad , 2)}}</td>
-                <td style="text-align:right">${{number_format(($item->precio  + $item->utilidad ) * $item->cantidad , 2)}}</td>
+                <td style="text-align:right">${{number_format($item->precio +($item->precio  * $item->utilidad / 100), 2)}}</td>
+
+                <td style="text-align:right">${{number_format(($item->precio +($item->precio  * $item->utilidad / 100))  * $item->cantidad , 2)}}</td>
 
             </tr>
              @endforeach
